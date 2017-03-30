@@ -37,7 +37,7 @@ const parseFile = (rootPath, filePath, source) => {
   if (requireNodes.length === 0) return source;
   
   // This now is specifically to my aliases
-  const aliases = ['common', 'process', 'component'];
+  const aliases = ['common', 'process', 'component', 'modules'];
   let changeOffset = 0;
   requireNodes.forEach((node) => {
     const splitPath = node.path.split('/');
@@ -54,6 +54,9 @@ const parseFile = (rootPath, filePath, source) => {
         break;
       case 'component':
         resolvePath = path.resolve(resolvePath, 'neo2-process-component/*/src/main/modules/**/' + module + '.module.js');
+        break;
+      case 'modules':
+        resolvePath = path.resolve(resolvePath, 'neo2-process-wireline-activation/neo2-process-wireline-activation-frontend/src/main/modules/**/' + module + '.module.js');
         break;
     }
     const resolveFile = glob.sync(resolvePath);
